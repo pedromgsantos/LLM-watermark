@@ -20,7 +20,7 @@ The notebook needs PyTorch as well. If it is not already installed in the select
 - **Model rewrites and translation:** a second model from another family and of similar size, `SmolLM2-1.7B-Instruct`, has no key and no watermark. It paraphrases 15 watermarked answers and runs an English-to-Portuguese-to-English round trip on them. Separately, the watermarked Qwen translates 15 Wikipedia paragraphs into Portuguese, with a control run of the same Qwen with the watermark off. SmolLM2 is mostly an English model, so the Portuguese leg of the round trip may be weak; the paraphrase alone already shows the effect. Rewrites are capped at 300 new tokens.
 - **Document dilution:** places a watermarked passage in a 1,500-word Wikipedia-derived document at 2%, 5%, 10%, 25%, or 50%. It compares whole-document scoring with the highest score among 200-word windows at a 50-word stride. The window cutoff is the maximum score observed on 30 human-only documents; it is not a calibrated 1% false-positive threshold.
 
-The notebook displays results and plots in the notebook. It does not create the separate `src/`, `experiments/`, `results/`, or `figures/` structure described in earlier project plans, nor does it calculate bootstrap confidence intervals.
+The notebook displays results and plots in the notebook.
 
 ## Watermark configuration
 
