@@ -32,9 +32,9 @@ The key list is sampled deterministically with `random.Random(42)` from the smal
 
 The notebook re-tokenizes the text, obtains the 0/1 g-values, and ignores repeated contexts. Its detector computes
 
-`z = (mean_g - 0.5) / sqrt(0.25 / N)`,
+$$z = \frac{\bar{g} - 0.5}{\sqrt{0.25 / N}},$$
 
-where `N` is the number of retained g-values across token positions and watermark layers. Under the unwatermarked null, the g-values are treated as independent Bernoulli(0.5) observations. The threshold `2.33` is the rounded 99th percentile of the standard normal distribution: `P(Z >= 2.33) ≈ 0.0099`. Thus it is a one-sided, normal-approximation p-value cutoff of about 1% under those assumptions. It does **not** mean there is a 1% probability that a flagged text is human-written.
+where $\bar{g}$ is the mean g-value and $N$ is the number of retained g-values across token positions and watermark layers. Under the unwatermarked null, the g-values are treated as independent Bernoulli(0.5) observations. The threshold `2.33` is the rounded 99th percentile of the standard normal distribution: $P(Z \ge 2.33) \approx 0.0099$. Thus it is a one-sided, normal-approximation p-value cutoff of about 1% under those assumptions. It does **not** mean there is a 1% probability that a flagged text is human-written.
 
 The value `2.33` comes from the standard normal quantile, not from the SynthID-Text paper. This notebook uses a simple z-test; it does not implement the paper's trained Bayesian detector or the exact-binomial frequentist detector in Google's reference repository. Treat the 1% as a nominal threshold and inspect the false-positive rates the notebook actually observes on its unwatermarked and human comparison texts. Those results are not a calibration guarantee for every corpus or fixed key.
 
